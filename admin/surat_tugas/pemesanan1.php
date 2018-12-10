@@ -1,16 +1,12 @@
-<?php
-session_start();
-if ($_SESSION['username'] = $username)
-{
-$koneksi=mysql_connect("localhost","root","") or die(mysql_error());
-mysql_select_db("sutuga",$koneksi);
-$query=mysql_query("select * from admin where username='$username'",$koneksi);
-$row=mysql_fetch_array($query);
-}
-else
-header("location:bukan_member.php");
-?>
-<link href="JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<?php 
+
+  include '../../koneksi.php';
+  // cek apakah yang mengakses halaman ini sudah login
+  if($_SESSION['status']==""){
+    header("location:../../index.php?pesan=gagal");
+  }
+  ?>
+<link href="../../JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
 <SCRIPT language=Javascript>
 
@@ -23,12 +19,10 @@ if (charCode > 31 && (charCode < 48 || charCode > 57))
 return false;
 return true;
 }
-
-
 </script>
-<script type="text/javascript" src="JQuery/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="JQuery/jquerycssmenu.js"></script>
-<script src="JQuery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../../JQuery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../JQuery/jquerycssmenu.js"></script>
+<script src="../../JQuery/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 	function cari_menu(){
@@ -80,9 +74,9 @@ return true;
 
 <?php
 
-$view = mysql_query("select * from surat_tugas order by id desc");
-$record = mysql_fetch_array($view);
-$surat= $_POST[nosurattxt];
+$view = mysqli_query($koneksi,"select * from surat_tugas order by id desc");
+$record = mysqli_fetch_array($view);
+
 $kode = $record['id']+1;
 $bulan = Date("m");
 $tahun = Date("Y");
@@ -98,16 +92,16 @@ $tahun = Date("Y");
       <tr>
       <td width="14%" align="left" valign="middle">No Surat</td>
       <td width="1%" align="left" valign="middle">:</td>
-      <td width="41%" align="left" valign="top"><input name="nosurattxt" type="text" id="nosurattxt" value="<?php echo "$surat" ?>" size="30" maxlength="50" readonly="readonly"  /></td>
+      <td width="41%" align="left" valign="top"><input name="nosurattxt" type="text" id="nosurattxt" value="<?php echo $_POST['nosurattxt']; ?>" size="30" maxlength="50" readonly="readonly"  /></td>
       
     </tr>
       <tr>
       <td width="14%" align="left" valign="middle">Kepada</td>
       <td width="1%" align="left" valign="middle">:</td>
-      <td width="41%" align="left" valign="middle"><input name="kepada" type="text" id="kepada" value="<?php echo $kepada ?>" maxlength="100" readonly="readonly"/></td>
+      <td width="41%" align="left" valign="middle"><input name="kepada" type="text" id="kepada" value="<?php echo $_POST['kepada']; ?>" maxlength="100" readonly="readonly"/></td>
       <td align="left" valign="middle">Pejabat</td>
       <td align="left" valign="middle">:</td>
-      <td colspan="4" align="left" valign="top"><input name="pejabat" value="<?php echo $pejabat ?>" type="text" id="pejabat" size="20" /></td>
+      <td colspan="4" align="left" valign="top"><input name="pejabat" value="<?php echo $_POST['pejabat']; ?>" type="text" id="pejabat" size="20" /></td>
     </tr>
     <tr>
       <td width="14%" align="left" valign="middle">Kode Mata Kuliah</td>
@@ -125,8 +119,8 @@ $tahun = Date("Y");
     <tr>
       <td align="left" valign="middle">Tanggal</td>
       <td align="left" valign="middle">:</td>
-      <td align="left" valign="top"><input name="tglawal" type="text" id="tglawal" value="<?php echo $tglawal ?>" size="6" maxlength="5" readonly="readonly" /> 
-	  Sampai <input name="tglakhir" type="text" id="tglakhir" value="<?php echo $tglakhir ?>" size="6" maxlength="5" readonly="readonly" /></td>
+      <td align="left" valign="top"><input name="tglawal" type="text" id="tglawal" value="<?php echo $_POST['tglawal']; ?>" size="6" maxlength="5" readonly="readonly" /> 
+	  Sampai <input name="tglakhir" type="text" id="tglakhir" value="<?php echo $_POST['tglakhir']; ?>" size="6" maxlength="5" readonly="readonly" /></td>
       
       <td align="left" valign="middle">Hari</td>
       <td align="left" valign="middle">:</td>
@@ -136,10 +130,8 @@ $tahun = Date("Y");
 												<option value="Rabu">Rabu</option>
 												<option value="Kamis">Kamis</option>		
 												<option value="Jumat">Jumat</option>
-												
 												</select>
 												</td></tr>
-      
     </tr>
     <tr>
       <td align="left" valign="middle">Semester </td>
@@ -163,7 +155,7 @@ $tahun = Date("Y");
 	<tr>
       <td align="left" valign="middle">Tgl SAP</td>
       <td align="left" valign="middle">:</td>
-      <td align="left" valign="top"><input name="tglsap" type="text" id="tglsap" value="<?php echo $tglsap ?>" size="6" maxlength="10" readonly="readonly" /></td>
+      <td align="left" valign="top"><input name="tglsap" type="text" id="tglsap" value="<?php echo $_POST['tglsap']; ?>" size="6" maxlength="10" readonly="readonly" /></td>
       
       <td align="left" valign="middle">Ruangan</td>
       <td align="left" valign="middle">:</td>
@@ -172,8 +164,8 @@ $tahun = Date("Y");
 	  
 	  
 		
-		$tampil = mysql_query("select * from ruang order by kd_ruang asc");
-		while($data = mysql_fetch_array($tampil))
+		$tampil = mysqli_query($koneksi,"select * from ruang order by kd_ruang asc");
+		while($data = mysqli_fetch_array($tampil))
 		{
 			echo'<option value="'.$data['nm_ruang'].'">'.$data['nm_ruang'].'</option>';
 		}
@@ -210,11 +202,11 @@ $tahun = Date("Y");
         
 <?php
 $no=1;
-$surat= $_POST[nosurattxt];
+$surat= $_POST['nosurattxt'];
 $nosurat ="B$kode/Uin.05/III.7/PP.00.9/$bulan/$tahun";
 $sql1 = "select * from rincian_surat inner join matkul on rincian_surat.kd_matkul = matkul.kd_matkul where rincian_surat.no_surat ='$surat'";
-$proses1 = mysql_query($sql1);
-while ($record1 = mysql_fetch_array($proses1))
+$proses1 = mysqli_query($koneksi,$sql1);
+while ($record1 = mysqli_fetch_array($proses1))
 {
 ?>   
      

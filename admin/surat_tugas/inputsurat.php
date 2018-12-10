@@ -1,5 +1,5 @@
 
-<link href="JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<link href="../../JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
 <SCRIPT language=Javascript>
 
@@ -15,18 +15,18 @@ return true;
 
 
 </script>
-<script type="text/javascript" src="JQuery/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="JQuery/jquerycssmenu.js"></script>
-<script src="JQuery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../../JQuery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../JQuery/jquerycssmenu.js"></script>
+<script src="../../JQuery/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
 	$("#tglsap").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});		
+      showOn: "both", buttonImage: "../../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});		
 	$("#tglawal").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
+      showOn: "both", buttonImage: "../../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
 	  $("#tglakhir").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
+      showOn: "both", buttonImage: "../../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
 	function cari_menu(){
 		var kode=$("#kdmatkultxt").val();
 			if(kode!=""){
@@ -75,8 +75,8 @@ return true;
 </script>
 
 <?php
-
-$view = mysqli_query("select * from surat_tugas order by id desc");
+include '../../koneksi.php';
+$view = mysqli_query($koneksi,"select * from surat_tugas order by id desc");
 $record = mysqli_fetch_array($view);
 $kode = $record['id']+1;
 
@@ -97,7 +97,7 @@ $tahun = Date("Y");
       <td align="left" valign="middle">:</td>
       <td colspan="4" align="left" valign="top"><select name="pejabat">
 	  <?php include "koneksi.php";
-		$tampil = mysqli_query("select * from dosen order by nm_dosen asc");
+		$tampil = mysqli_query($koneksi,"select * from dosen order by nm_dosen asc");
 		while($data = mysqli_fetch_array($tampil))
 		{
 			echo'<option value="'.$data['nm_dosen'].'">'.$data['nm_dosen'].'</option>';
@@ -111,7 +111,7 @@ $tahun = Date("Y");
       <td width="1%" align="left" valign="middle">:</td>
       <td width="41%" align="left" valign="middle"><select name="kepada">
 	  <?php include "koneksi.php";	
-		$tampil = mysqli_query("select * from dosen order by nm_dosen asc");
+		$tampil = mysqli_query($koneksi,"select * from dosen order by nm_dosen asc");
 		while($data = mysqli_fetch_array($tampil))
 		{
 			echo'<option value="'.$data['nm_dosen'].'">'.$data['nm_dosen'].'</option>';
@@ -135,9 +135,11 @@ $tahun = Date("Y");
       </table></td>
     </tr>
    <tr>
-      <td align="left" valign="top">&nbsp;</td>
-      <td align="left" valign="top">&nbsp;</td>
-      <td colspan="3" align="center"><input type="submit" name="tambahbtn" id="tambahbtn" value="Submit" /></td>
+   	<div class="form-group"> 
+	<div class="col-sm-offset-2 col-sm-10"></div></div>
+      <div class="col-sm-offset-2"> 
+		<button type="submit" name="submit" class="btn btn-default w3ls-button">Submit</button> 
+	</div> 
     </tr>
   </table>
 </form>

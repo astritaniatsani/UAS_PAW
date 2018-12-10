@@ -3,7 +3,7 @@
 <!-- Head -->
 
 <head>
-    <title>SISuTas : Sistem Informasi Surat Tugas</title>
+    <title>SISAMIK : Sistem Informasi Surat Akademik</title>
     
     <script>
         addEventListener("load", function () {
@@ -25,7 +25,7 @@
 </head>
 <body> 
 <form name="form1" method="post" action="cek_login.php">
-    <h1 class="title-agile text-center">SISuTas : Sistem Informasi Surat Tugas </h1>
+    <h1 class="title-agile text-center">SISAMIK : Sistem Informasi Surat Akademik </h1>
 			<h2 class="title-agile text-center span">Fakultas <span>Sains</span> dan <span>Teknologi</span> </h2>
     ?></div>
     <div class="content-w3ls">
@@ -54,7 +54,7 @@
     </div>
     <div class="copyright text-center">
         <p>© 2018 Sistem Informasi Surat 
- Tugas | Design by Astri Tania and Winna Crista
+ Akademik | Design by Astri Tania and Winna Crista
         </p>
     </div>
 </body>

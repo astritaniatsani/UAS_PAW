@@ -4,21 +4,21 @@
 </head>
 <body>
 <?php
-include "koneksi.php";
+include '../koneksi.php';
 $nip = $_GET['nip']; 
-$query=mysql_query("delete from pejabat where nip='$nip'") or die("Gagal menghapus data.");
-mysql_close($koneksi);
+$query=mysqli_query($koneksi,"delete from dosen where nip='$nip'") or die("Gagal menghapus data.");
+mysqli_close($koneksi);
  
 if($query){
 		?><div class="alert alert-success" role="alert">
 									<strong>
                                     <h3>Data Berhasil Dihapus!!!
-								</div><script language="javascript">document.location.href="data_pejabat.php";</script><?php
+								</div><script language="javascript">document.location.href="data_dosen.php";</script><?php
 	}else{ 
 		?><div class="alert alert-success" role="alert">
 									<strong>
                                     <h3>Data  Gagal Dihapus !!!
-								</div><script language="javascript">document.location.href="data_pejabat.php";</script>
+								</div><script language="javascript">document.location.href="data_dosen.php";</script>
 	<?php
 	}
 	?>

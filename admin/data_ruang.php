@@ -1,16 +1,35 @@
+<?php 
+	session_start();
+
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
+	
 <?php
-session_start();
-if ($_SESSION['username'] = $username)
-{
-$koneksi=mysql_connect("localhost","root","") or die(mysql_error());
-mysql_select_db("sutuga",$koneksi);
-$query=mysql_query("select * from admin where username='$username'",$koneksi);
-$row=mysql_fetch_array($query);
+
+include '../koneksi.php';
+
+if(isset($_POST['submit'])){
+	
+	$kd_ruang=htmlentities($_POST['kd_ruang']);
+	$nm_ruang=ucwords(htmlentities($_POST['nm_ruang']));
+	$kapasitas=ucwords(htmlentities($_POST['kapasitas']));
+	
+	$query=mysqli_query($koneksi,"insert into ruang values('$kd_ruang','$nm_ruang','$kapasitas')");
+	if($query){
+		?><script language="javascript">document.location.href="data_ruang.php";</script><?php
+	}else{
+		?><script language="javascript">document.location.href="data_ruang.php";</script><?php
+	}
+	
+}else{
+	unset($_POST['submit']);
 }
-else
-header("location:bukan_member.php");
+
+
 ?>
-<link href="JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 
 <!DOCTYPE html>
 <head>
@@ -20,41 +39,25 @@ header("location:bukan_member.php");
 <meta name="keywords" content="Colored Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
-<script type="text/javascript" src="JQuery/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="JQuery/jquerycssmenu.js"></script>
-<script src="JQuery/jquery-ui-1.10.3.custom.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		
-	$("#tglsap").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});		
-	$("#tglawal").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
-	  $("#tglakhir").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
-		
-})		
-</script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
+<link rel="stylesheet" href="../css/font.css" type="text/css"/>
+<link href="../css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
-<script src="js/jquery2.0.3.min.js"></script>
-<script src="js/modernizr.js"></script>
-<script src="js/jquery.cookie.js"></script>
-
+<script src="../js/jquery2.0.3.min.js"></script>
+<script src="../js/modernizr.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/screenfull.js"></script>
 <!-- tables -->
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-<link rel="stylesheet" type="text/css" href="css/basictable.css" />
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="../css/basictable.css" />
+<script type="text/javascript" src="../js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#table').basictable();
@@ -85,10 +88,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //tables -->
 </head>
 <body class="dashboard-page">
-<nav class="main-menu">
+	<nav class="main-menu">
 		<ul>
 			<li>
-				<a href="index.php">
+				<a href="admin.php">
 					<i class="fa fa-home nav_icon"></i>
 					<span class="nav-text">
 					Dashboard
@@ -146,14 +149,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					Ruang
 					</a>
 					</li>
+				</ul>
+			</li>
+			<li class="has-subnav">
+				<a href="javascript:;">
+				<i class="fa fa-file-text-o nav_icon"></i>
+				<span class="nav-text">
+					Data Surat Akademik
+				</span>
+				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+				</a>
+				<ul>
 					<li>
-					<a class="subnav-text" href="data_pejabat.php">
-					Pejabat
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
+					Surat Tugas Mengajar
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skl/data_skl.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skkp/data_skkp.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skp/data_skp.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skt/data_skt.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
- 
 			<li>
 				<a href="laporan_sutuga.php">
 					<i class="fa fa-file-text-o nav_icon"></i>
@@ -162,7 +195,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</span>
 				</a>
 			</li>
-			
 			
 		</ul>
 		<ul class="logout">
@@ -185,7 +217,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</nav>
 		<section class="title-bar">
 			<div class="logo">
-				<h1><a href="index.html"><img src="images/logo.png" alt="" />SISTM</a></h1>
+				<h1><a href="index.html"><img src="../images/logo.png" alt="" />SISTM</a></h1>
+			</div>
 			</div>
 			<div class="w3l_search">
 				<form action="#" method="post">
@@ -196,17 +229,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="header-right">
 				<div class="profile_details_left">
 					<div class="header-right-left">
-						<!--notifications of menu start -->
-												  
-									
-								
-									
+						<!--notifications of menu start -->						
 										<div class="notification_bottom"><strong>
-											Well come Administrator !</strong></font>
+										
+											Well come Administrator <?php echo $_SESSION['username']; ?> !</strong></font>
 										</div> 
-									
-								</ul>
-							</li>	
 							<div class="clearfix"> </div>
 						</ul>
 					</div>	
@@ -238,44 +265,94 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- tables -->
 				
 				<div class="table-heading">
-					<h2>Surat Tugas Mengajar</h2>
+					<h2>Data Ruangan</h2>
 				</div>
         <div class="panel panel-widget forms-panel">
 						<div class="forms">
 							<div class=" form-grids form-grids-right">
 								<div class="widget-shadow " data-example-id="basic-forms"> 
 									<div class="form-title">
-										<h4>Form  Input Data Surat :</h4>
+										<h4>Form  Input Data Ruangan :</h4>
 									</div>
 									<div class="form-body">
-										<form class="form-horizontal" action="pemesanan.php" method="post"> 
-											<?php include "inputsurat.php"; ?>          
-											
-										<div
+										<form class="form-horizontal" action="#" method="post"> 
 											<div class="form-group"> 
+												<label for="inputEmail3" class="col-sm-2 control-label">Kode Ruang</label> 
+												<div class="col-sm-9"> 
+													<input type="text" name="kd_ruang" class="form-control" id="kd_ruang" placeholder="Kode Ruang"> 
+												</div> 
+									</div> 
+                                    <div class="form-group"> 
+												<label for="inputEmail3" class="col-sm-2 control-label">Nama Ruang</label> 
+												<div class="col-sm-9"> 
+													<input type="text" name="nm_ruang" class="form-control" id="nm_ruang" placeholder="Nama Ruang"> 
+												</div> 
+											</div> 
+											<div class="form-group"> 
+												<label for="inputPassword3" class="col-sm-2 control-label">Kapasitas Ruang</label> 
+												<div class="col-sm-9"> 
+													<input type="kapasitas" name="kapasitas" class="form-control" id="kapasitas" placeholder="Kapasitas"> 
+												</div></div> 											<div class="form-group"> 
 												<div class="col-sm-offset-2 col-sm-10"> 									
 												</div> 
 											</div> 
-											 
+											<div class="col-sm-offset-2"> 
+												<button type="submit" name="submit" class="btn btn-default w3ls-button">Submit</button> 
+											</div> 
 										</form> 
 									</div>
 								</div>
 							</div>
 						</div>	
 					</div>
-	
+				<div class="agile-tables">
+					<div class="w3l-table-info">
+					  <h3>Tabel Data Ruang</h3>
+					    <table id="table">
+						<thead>
+						  <tr>
+							<th>No</th>
+							<th>Kode Ruang</th>
+							<th>Nama Ruang</th>
+							<th>Kapasitas</th>
+							<th>Aksi</th>
+						  </tr>
+						</thead>
+						<tbody>
+						   	
+		<?php
+		$view=mysqli_query($koneksi,"select * from ruang order by kd_ruang asc");
+		$no=0;
+		while($row=mysqli_fetch_array($view)){
+		?>	
+		<tr>
+            <td><?php echo $no=$no+1;?></td>       
+            <td><?php echo $row['kd_ruang'];?></td>
+            <td><?php echo $row['nm_ruang'];?></td>
+            <td><?php echo $row['kapasitas'];?></td>
+           
+            <td class="options-width">
+            <a href="edit_ruang.php?kd_ruang=<?php echo $row['kd_ruang']; ?>"><img src="../images/ubah.png" width="15" height="15" /></a> |
+<a href="hapus_ruang.php?kd_ruang=<?php echo $row['kd_ruang']; ?>"><img src="../images/hapus.png" width="15" height="15" /></a>            
+            </td>
+        </tr>
+		<?php
+		}
+		?>
+        
         <!--  end product-table................................... --> 
         </form>
 
-						
+						</tbody>
+					  </table>
 					</div>  
 				</div>
 				<!-- //tables -->
 			</div>
 		</div>
 	</section>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/proton.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/proton.js"></script>
 </body>
 </html>
    

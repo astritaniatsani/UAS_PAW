@@ -1,28 +1,34 @@
+<?php 
+	session_start();
+
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
+
 <?php
-
-include "koneksi.php";
-
+include '../koneksi.php';
 if(isset($_POST['submit'])){
 	
-	$nip=htmlentities($_POST['nip']);
+	$nip=ucwords(htmlentities($_POST['nip']));
 	$nm_dosen=ucwords(htmlentities($_POST['nm_dosen']));
-	$gelar=htmlentities($_POST['gelar']);
+	$gelar=ucwords(htmlentities($_POST['gelar']));
 	$j_kelamin=htmlentities($_POST['j_kelamin']);
 	$alamat=ucwords(htmlentities($_POST['alamat']));
-	$prodi=ucwords(htmlentities($_POST['prodi']));
+	$prodi=htmlentities($_POST['prodi']);
 	$status=htmlentities($_POST['status']);
 	
 	
-	$query=mysql_query("insert into dosen values('$nip','$nm_dosen','$gelar','$j_kelamin','$alamat','$prodi','$status')");
+	$query=mysqli_query($koneksi,"insert into dosen values('$nip','$nm_dosen','$gelar','$j_kelamin','$alamat','$prodi','$status')");
 	
 	
 	if($query){
-		echo "Data berhasil disimpan";
 		?><div class="alert alert-success" role="alert">
 									<strong>
-                                    <h1>Data Berhasisl Disimpan !!!
+                                    <h1>Data Berhasil Disimpan !!!
 								</div><script language="javascript">document.location.href="data_dosen.php";</script><?php
-	}else{ echo "Data tidak berhasil disimpan";
+	}else{
 		?><div class="alert alert-success" role="alert">
 									<strong>
                                     <h1>Data Gagal Disimpan !!!
@@ -35,37 +41,29 @@ if(isset($_POST['submit'])){
 
 
 ?>
-
-
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <head>
-<title>SISTM : Sitem Informasi Surat Tugas Fakultas Sains dan Teknologi</title>
+<title>SISAMIK : Sistem Informasi Surat Akademik</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Colored Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
+<link rel="stylesheet" href="../css/font.css" type="text/css"/>
+<link href="../css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
-<script src="js/jquery2.0.3.min.js"></script>
-<script src="js/modernizr.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script src="js/screenfull.js"></script>
+<script src="../js/jquery2.0.3.min.js"></script>
+<script src="../js/modernizr.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/screenfull.js"></script>
 <script>
 	$(function () {
 		$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
@@ -80,9 +78,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <!-- tables -->
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-<link rel="stylesheet" type="text/css" href="css/basictable.css" />
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="../css/basictable.css" />
+<script type="text/javascript" src="../js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#table').basictable();
@@ -116,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <nav class="main-menu">
 		<ul>
 			<li>
-				<a href="index.php">
+				<a href="admin.php">
 					<i class="fa fa-home nav_icon"></i>
 					<span class="nav-text">
 					Dashboard
@@ -125,21 +123,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li class="has-subnav">
 				<a href="javascript:;">
-				<i class="fa fa-check-square-o nav_icon"></i>
+				<i class="fa fa-file-text-o nav_icon"></i>
 				<span class="nav-text">
-					Surat Tugas
+					Data Surat Akademik
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="input_sutuga.php">
-					Input Surat Tugas
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
+					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_sutuga.php">
-					Data Surat Tugas
+					<a class="subnav-text" href="skl/data_skl.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skkp/data_skkp.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skp/data_skp.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skt/data_skt.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
@@ -174,28 +187,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					Ruang
 					</a>
 					</li>
+				</ul>
+			</li>
+			<li class="has-subnav">
+				<a href="javascript:;">
+				<i class="fa fa-file-text-o nav_icon"></i>
+				<span class="nav-text">
+					Data Surat Akademik
+				</span>
+				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+				</a>
+				<ul>
 					<li>
-					<a class="subnav-text" href="data_pejabat.php">
-					Pejabat
+					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					Surat Tugas Mengajar
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skl/input_skl.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skkp/input_skkp.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skp/input_skp.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skt/input_skt.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
- 
-			<li>
-				<a href="laporan_sutuga.php">
-					<i class="fa fa-file-text-o nav_icon"></i>
-					<span class="nav-text">
-					Laporan
-					</span>
-				</a>
-			</li>
-			
-			
 		</ul>
 		<ul class="logout">
 			<li>
-			<a href="logout.php">
+			<a href="../logout.php">
 			<i class="icon-off nav-icon"></i>
 			<span class="nav-text">
 			Logout
@@ -213,7 +246,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</nav>
 		<section class="title-bar">
 			<div class="logo">
-				<h1><a href="index.html"><img src="images/logo.png" alt="" />SISTM</a></h1>
+				<h1><a href="index.html"><img src="../images/logo.png" alt="" />SISTM</a></h1>
 			</div>
 			<div class="full-screen">
 				<section class="full-top">
@@ -230,12 +263,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="profile_details_left">
 					<div class="header-right-left">
 						<!--notifications of menu start -->
-												  
-									
-								
-									
 										<div class="notification_bottom"><strong>
-											Well come Administrator !</strong></font>
+											Well come Administrator  <?php echo $_SESSION['username']; ?>!</strong></font>
 										</div> 
 									
 								</ul>
@@ -255,7 +284,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<ul class="dropdown-menu drp-mnu">
 									<li> <a href="data_user.php"><i class="fa fa-cog"></i> Settings</a> </li> 
 									<li> <a href="detail_user.php"><i class="fa fa-user"></i> Profile</a> </li> 
-									<li> <a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
+									<li> <a href="../logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
 								</ul>
 							</li>
 						</ul>
@@ -334,13 +363,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						</div>	
 					</div>
-		
-        
-        
-        
-        
-        
-			
 				<div class="agile-tables">
 					<div class="w3l-table-info">
 					  <h3>Tabel Data Dosen</h3>
@@ -361,10 +383,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<tbody>
 						   	
 		<?php
-		$view=mysql_query("select * from dosen order by nip asc");
+		$view=mysqli_query($koneksi,"select * from dosen order by nm_dosen asc");
 		
 		$no=0;
-		while($row=mysql_fetch_array($view)){
+		while($row=mysqli_fetch_array($view)){
 		?>	
 		<tr>
             <td><?php echo $no=$no+1;?></td>
@@ -378,8 +400,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <td><?php echo $row['status'];?></td>
            
             <td class="options-width">
-            <a href="edit_dosen.php?nip=<?php echo $row['nip']; ?>"><img src="images/ubah.png" width="15" height="15" /></a> |
-<a href="hapus_dosen.php?nip=<?php echo $row['nip']; ?>"><img src="images/hapus.png" width="15" height="15" /></a>            
+            <a href="edit_dosen.php?nip=<?php echo $row['nip']; ?>"><img src="../images/ubah.png" width="15" height="15" /></a> |
+<a href="hapus_dosen.php?nip=<?php echo $row['nip']; ?>"><img src="../images/hapus.png" width="15" height="15" /></a>            
             </td>
         </tr>
 		<?php
@@ -396,14 +418,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //tables -->
 			</div>
 		</div>
-		<!-- footer -->
-		<div class="footer">
-			<p>© 2016 Colored . All Rights Reserved . Design by <a href="http://w3layouts.com/">W3layouts</a></p>
-		</div>
-		<!-- //footer -->
 	</section>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/proton.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/proton.js"></script>
 </body>
 </html>
    

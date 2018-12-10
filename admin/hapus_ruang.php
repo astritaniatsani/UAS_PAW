@@ -4,10 +4,10 @@
 </head>
 <body>
 <?php
-include "koneksi.php";
+include '../koneksi.php';
 $kd_ruang = $_GET['kd_ruang']; 
-$query=mysql_query("delete from ruang where kd_ruang='$kd_ruang'") or die("Gagal menghapus data.");
-mysql_close($koneksi);
+$query=mysqli_query($koneksi,"delete from ruang where kd_ruang='$kd_ruang'") or die("Gagal menghapus data.");
+mysqli_close($koneksi);
  
 if($query){
 		?><div class="alert alert-success" role="alert">

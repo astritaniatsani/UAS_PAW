@@ -1,15 +1,14 @@
 <?php 
-session_start();
-
-if(isset($_SESSION['username'])){
-
-	//koneksi terpusat
-	include "../koneksi.php";
-	$username=$_SESSION['username'];
-?>
+	session_start();
+	include '../koneksi.php';
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
 <!DOCTYPE html>
 <head>
-<title>SISuTas : Sitem Informasi Surat Tugas</title>
+<title>SISAMIK : Sitem Informasi Surat Akademik</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Colored Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -30,19 +29,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="../js/modernizr.js"></script>
 <script src="../js/jquery.cookie.js"></script>
 <script src="../js/screenfull.js"></script>
-<script>
-	$(function () {
-		$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
-
-		if (!screenfull.enabled) {
-			return false;
-		}
-
-		$('#toggle').click(function () {
-			screenfull.toggle($('#container')[0]);
-		});	
-	});
-</script>
 <!-- tables -->
 <link rel="stylesheet" type="text/css" href="../css/table-style.css" />
 <link rel="stylesheet" type="text/css" href="../css/basictable.css" />
@@ -222,8 +208,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<tbody>
 						   	
 		<?php
-		//include("../koneksi.php");
-		$view=mysql_query("select * from dosen order by nip asc");
+		
+		$view=mysql_query($koneksi,"select * from dosen order by nip asc");
 		
 		$no=0;
 		while($row=mysql_fetch_array($view)){

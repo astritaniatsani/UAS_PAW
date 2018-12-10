@@ -1,78 +1,55 @@
-<?php
-session_start();
-if ($_SESSION['username'] = $username)
-{
-$koneksi=mysql_connect("localhost","root","") or die(mysql_error());
-mysql_select_db("sutuga",$koneksi);
-$query=mysql_query("select * from admin where username='$username'",$koneksi);
-$row=mysql_fetch_array($query);
-}
-else
-header("location:bukan_member.php");
-?>
+<?php 
+	session_start();
+
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
 <link href="JQuery/smoothness/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+
 <!DOCTYPE html>
 <head>
-<title>SISTM : Sitem Informasi Surat Tugas Fakultas Sains dan Teknologi</title>
+<title>SISAMIK : Sistem Informasi Surat Akademik</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Colored Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-
-<script type="text/javascript" src="JQuery/jquery-1.9.1.js"></script>
-<script type="text/javascript" src="JQuery/jquerycssmenu.js"></script>
-<script src="JQuery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="../JQuery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../JQuery/jquerycssmenu.js"></script>
+<script src="../JQuery/jquery-ui-1.10.3.custom.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
 	$("#tglsap").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});		
+      showOn: "both", buttonImage: "../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});		
 	$("#tglawal").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
+      showOn: "both", buttonImage: "../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
 	  $("#tglakhir").datepicker({
-      showOn: "both", buttonImage: "images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
+      showOn: "both", buttonImage: "../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
 		
 })		
 </script>
 <!-- bootstrap-css -->
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
 <!-- //bootstrap-css -->
 <!-- Custom CSS -->
-<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="../css/style.css" rel='stylesheet' type='text/css' />
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 <!-- font-awesome icons -->
-<link rel="stylesheet" href="css/font.css" type="text/css"/>
-<link href="css/font-awesome.css" rel="stylesheet"> 
+<link rel="stylesheet" href="../css/font.css" type="text/css"/>
+<link href="../css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
-<script src="js/jquery2.0.3.min.js"></script>
-<script src="js/modernizr.js"></script>
-<script src="js/jquery.cookie.js"></script>
-<script src="js/screenfull.js"></script>
-<script>
-	$(function () {
-		$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
-
-		if (!screenfull.enabled) {
-			return false;
-		}
-
-		$('#toggle').click(function () {
-			screenfull.toggle($('#container')[0]);
-		});	
-	});
-</script>
+<script src="../js/jquery2.0.3.min.js"></script>
+<script src="../js/modernizr.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="../js/screenfull.js"></script>
 <!-- tables -->
-<link rel="stylesheet" type="text/css" href="css/table-style.css" />
-<link rel="stylesheet" type="text/css" href="css/basictable.css" />
-<script type="text/javascript" src="js/jquery.basictable.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/table-style.css" />
+<link rel="stylesheet" type="text/css" href="../css/basictable.css" />
+<script type="text/javascript" src="../js/jquery.basictable.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
       $('#table').basictable();
@@ -106,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <nav class="main-menu">
 		<ul>
 			<li>
-				<a href="index.php">
+				<a href="admin.php">
 					<i class="fa fa-home nav_icon"></i>
 					<span class="nav-text">
 					Dashboard
@@ -117,19 +94,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href="javascript:;">
 				<i class="fa fa-check-square-o nav_icon"></i>
 				<span class="nav-text">
-					Surat Tugas
+					Surat Akademik
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
 				<ul>
 					<li>
 					<a class="subnav-text" href="input_sutuga.php">
-					Input Surat Tugas
+					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_sutuga.php">
-					Data Surat Tugas
+					<a class="subnav-text" href="data_dosen.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="data_matkul.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="data_ruang.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="data_ruang.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
@@ -164,28 +156,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					Ruang
 					</a>
 					</li>
+				</ul>
+			</li>
+			<li class="has-subnav">
+				<a href="javascript:;">
+				<i class="fa fa-file-text-o nav_icon"></i>
+				<span class="nav-text">
+					Data Surat Akademik
+				</span>
+				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+				</a>
+				<ul>
 					<li>
-					<a class="subnav-text" href="data_pejabat.php">
-					Pejabat
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
+					Surat Tugas Mengajar
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skl/data_skl.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skkp/data_skkp.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="skp/data_skp.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="skt/data_skt.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
- 
-			<li>
-				<a href="laporan_sutuga.php">
-					<i class="fa fa-file-text-o nav_icon"></i>
-					<span class="nav-text">
-					Laporan
-					</span>
-				</a>
-			</li>
-			
-			
 		</ul>
 		<ul class="logout">
 			<li>
-			<a href="logout.php">
+			<a href="../logout.php">
 			<i class="icon-off nav-icon"></i>
 			<span class="nav-text">
 			Logout
@@ -203,7 +215,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</nav>
 		<section class="title-bar">
 			<div class="logo">
-				<h1><a href="index.html"><img src="images/logo.png" alt="" />SISTM</a></h1>
+				<h1><a href="index.html"><img src="../images/logo.png" alt="" />SISTM</a></h1>
 			</div>
 			<div class="full-screen">
 				<section class="full-top">
@@ -220,12 +232,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="profile_details_left">
 					<div class="header-right-left">
 						<!--notifications of menu start -->
-												  
-									
-								
-									
 										<div class="notification_bottom"><strong>
-											Well come Administrator !</strong></font>
+											Well come Administrator  <?php echo $_SESSION['username']; ?>!</strong></font>
 										</div> 
 									
 								</ul>
@@ -245,7 +253,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<ul class="dropdown-menu drp-mnu">
 									<li> <a href="data_user.php"><i class="fa fa-cog"></i> Settings</a> </li> 
 									<li> <a href="detail_user.php"><i class="fa fa-user"></i> Profile</a> </li> 
-									<li> <a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
+									<li> <a href="../logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
 								</ul>
 							</li>
 						</ul>
@@ -261,7 +269,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- tables -->
 				
 				<div class="table-heading">
-					<h2>Surat Tugas Mengajar</h2>
+					<h2>Sistem Informasi Surat Akademik</h2>
 				</div>
         <div class="panel panel-widget forms-panel">
 						<div class="forms">
@@ -295,15 +303,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<!-- //tables -->
 			</div>
-		</div>
-		<!-- footer -->
-		<div class="footer">
-			<p>© 2018, SISTM : Sistem Informasi Surat Mengajar</p>
-		</div>
-		<!-- //footer -->
+</div>
 	</section>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/proton.js"></script>
+	<script src="../js/bootstrap.js"></script>
+	<script src="../js/proton.js"></script>
 </body>
 </html>
    
