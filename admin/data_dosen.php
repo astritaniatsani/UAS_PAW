@@ -114,7 +114,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <nav class="main-menu">
 		<ul>
 			<li>
-				<a href="admin.php">
+				<a href="index.php">
 					<i class="fa fa-home nav_icon"></i>
 					<span class="nav-text">
 					Dashboard
@@ -123,35 +123,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</li>
 			<li class="has-subnav">
 				<a href="javascript:;">
-				<i class="fa fa-file-text-o nav_icon"></i>
+				<i class="fa fa-check-square-o nav_icon"></i>
 				<span class="nav-text">
-					Data Surat Akademik
+					Surat Akademik
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
+					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skl/data_skl.php">
+					<a class="subnav-text" href="skl/data_dosen.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skkp/data_skkp.php">
+					<a class="subnav-text" href="skkp/data_matkul.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skp/data_skp.php">
+					<a class="subnav-text" href="skp/data_ruang.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skt/data_skt.php">
+					<a class="subnav-text" href="skt/data_ruang.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
@@ -199,32 +199,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skl/input_skl.php">
+					<a class="subnav-text" href="skl/data_skl.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skkp/input_skkp.php">
+					<a class="subnav-text" href="skkp/data_skkp.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skp/input_skp.php">
+					<a class="subnav-text" href="skp/data_skp.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skt/input_skt.php">
+					<a class="subnav-text" href="skt/data_skt.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
+            
+  
+			<li>
+				<a href="laporan_surat.php">
+					<i class="fa fa-file-text-o nav_icon"></i>
+					<span class="nav-text">
+					Laporan
+					</span>
+				</a>
+			</li>
+			
 		</ul>
 		<ul class="logout">
 			<li>
@@ -246,12 +257,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</nav>
 		<section class="title-bar">
 			<div class="logo">
-				<h1><a href="index.html"><img src="../images/logo.png" alt="" />SISTM</a></h1>
-			</div>
-			<div class="full-screen">
-				<section class="full-top">
-					<button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>	
-				</section>
+				<h1><a href="admin.php"><img src="../images/logo.png" alt="" />SISAMIK</a></h1>
 			</div>
 			<div class="w3l_search">
 				<form action="#" method="post">
@@ -295,11 +301,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"> </div>
 		</section>
 		<div class="main-grid">
-         
         <div class="agile-grids">	
 				<!-- tables -->
-				
-				<div class="table-heading">
+						<div class="table-heading">
 					<h2>Data Dosen</h2>
 				</div>
         <div class="panel panel-widget forms-panel">

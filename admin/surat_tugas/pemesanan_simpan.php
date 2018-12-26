@@ -2,6 +2,7 @@
 	include '../../koneksi.php';
 	// cek apakah yang mengakses halaman ini sudah login
 	?>
+	
 <?php
 if(isset($_POST['tambahbtn'])){
 	if(!$_POST['kdmatkultxt']){
@@ -21,7 +22,7 @@ if(isset($_POST['tambahbtn'])){
 			$tglakhir = substr($_POST['tglakhir'],6,4)."-".substr($_POST['tglakhir'],3,2)."-". substr($_POST['tglakhir'],0,2);
 			$tglsap = substr($_POST['tglsap'],6,4)."-".substr($_POST['tglsap'],3,2)."-". substr($_POST['tglsap'],0,2);
 			
-			$sql1 = "INSERT INTO surat_tugas(no_surat,nama,tgl_tugas,tgl_selesaitugas,tgl_sap,pejabat) VALUES ('$_POST[nosurattxt]','$_POST[kepada]','$_POST[tglawal]','$_POST[tglakhir]','$_POST[tglsap]','$_POST[pejabat]')";
+			$sql1 = "INSERT INTO surat_tugas(no_surat,nama,tgl_tugas,tgl_selesaitugas,tgl_sap,pejabat) VALUES ('$_POST[nosurattxt]','$_POST[kepada]','$tglawal','$tglakhir','$tglsap','$_POST[pejabat]')";
 			$proses1 = mysqli_query($koneksi,$sql1);
 			if ($proses1) {
 				echo "<script>alert('Penyimpanan data Surat berhasil !')</script>";

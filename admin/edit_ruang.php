@@ -7,20 +7,19 @@
 	}
 	?>
 <?php
-include '../koneksi.php';
+include "../koneksi.php";
 $kd_ruang= $_GET['kd_ruang'];
-$hasil = mysqli_query($koneksi,"select * from ruang where kd_ruang='$kd_ruang'") or die("Gagal melakukan query.");
+$hasil = mysqli_query($koneksi,"select * from ruang where kd_ruang='$kd_ruang'");
 $buff = mysqli_fetch_array($hasil);
-mysqli_close($koneksi);
 ?>
 <?php
 
 
 if(isset($_POST['submit'])){
 	
-	$kd_ruang=htmlentities($_POST['kd_ruang']);
-	$nm_ruang=ucwords(htmlentities($_POST['nm_ruang']));
-	$kapasitas=ucwords(htmlentities($_POST['kapasitas']));
+	$kd_ruang=$_POST['kd_ruang'];
+	$nm_ruang=$_POST['nm_ruang'];
+	$kapasitas=$_POST['kapasitas'];
 	
 	$query=mysqli_query($koneksi,"update ruang set nm_ruang='$nm_ruang', kapasitas='$kapasitas' where kd_ruang='$kd_ruang'");
 	
@@ -29,12 +28,12 @@ if(isset($_POST['submit'])){
 		?><div class="alert alert-success" role="alert">
 									<strong>
                                     <h3>Data Berhasis Diubah !!!
-								</div><!--<script language="javascript">document.location.href="data_ruang.php";</script>--><?php
+								</div><script language="javascript">document.location.href="data_ruang.php";</script><?php
 	}else{ 
 		?><div class="alert alert-success" role="alert">
 									<strong>
                                     <h3>Data Gagal Diubah !!!
-								</div><!--<script language="javascript">document.location.href="data_ruang.php";</script>--><?php
+								</div><script language="javascript">document.location.href="data_ruang.php";</script><?php
 	}
 		
 }else{
@@ -130,29 +129,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
-				<ul>
+								<ul>
 					<li>
 					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skl/input_skl.php">
+					<a class="subnav-text" href="skl/data_dosen.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skkp/input_skkp.php">
+					<a class="subnav-text" href="skkp/data_matkul.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skp/input_skp.php">
+					<a class="subnav-text" href="skp/data_ruang.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skt/input_skt.php">
+					<a class="subnav-text" href="skt/data_ruang.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
@@ -200,42 +199,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="data_jurusan.php">
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_dosen.php">
+					<a class="subnav-text" href="skl/data_skl.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_matkul.php">
+					<a class="subnav-text" href="skkp/data_skkp.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skp/data_skp.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skt/data_skt.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
-		</ul>
+            
+  
 			<li>
-				<a href="laporan_sutuga.php">
+				<a href="laporan_surat.php">
 					<i class="fa fa-file-text-o nav_icon"></i>
 					<span class="nav-text">
 					Laporan
 					</span>
 				</a>
 			</li>
-			
 			
 		</ul>
 		<ul class="logout">
@@ -260,11 +259,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="logo">
 				<h1><a href="admin.php"><img src="../images/logo.png" alt="" />SISTM</a></h1>
 			</div>
-			<div class="full-screen">
-				<section class="full-top">
-					<button id="toggle"><i class="fa fa-arrows-alt" aria-hidden="true"></i></button>	
-				</section>
-			</div>
 			<div class="w3l_search">
 				<form action="#" method="post">
 					<input type="text" name="search" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}" required>
@@ -276,7 +270,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="header-right-left">
 						<!--notifications of menu start -->
 										<div class="notification_bottom"><strong>
-											Well come Administrator <?php echo $_SESSION['username'] ?> !</strong></font>
+											Well come Administrator  <?php echo $_SESSION['username']; ?>!</strong></font>
 										</div> 
 									
 								</ul>

@@ -1,21 +1,17 @@
-<?php
-session_start();
-if ($_SESSION['username'] = $username)
-{
-$koneksi=mysql_connect("localhost","root","") or die(mysql_error());
-mysql_select_db("sutuga",$koneksi);
-$query=mysql_query("select * from admin where username='$username'",$koneksi);
-$row=mysql_fetch_array($query);
-}
-else
-header("location:bukan_member.php");
-?>
+<?php 
+  session_start();
+include '../../koneksi.php';
+  // cek apakah yang mengakses halaman ini sudah login
+  if($_SESSION['status']==""){
+    header("location:../../index.php?pesan=gagal");
+  }
+  ?>
  <?php
 $tanggal = date("d-m-Y");
 $jam = date("H:i:s");
 $sql = "select * from surat_tugas where no_surat ='$_GET[no_surat]'";
-$proses = mysql_query($sql);
-$record = mysql_fetch_array($proses)
+$proses = mysqli_query($koneksi,$sql);
+$record = mysqli_fetch_array($proses)
 ?>
 <table width="700" border="0" align="center">
   <tr>
@@ -60,9 +56,11 @@ $record = mysql_fetch_array($proses)
   </tr>
   </table>
    <?php
-$sql = "select * from surat_tugas where no_surat ='$_GET[no_surat]'";
-$proses = mysql_query($sql);
-$record = mysql_fetch_array($proses)
+$sql = "select * from surat_tugas inner join matkul on surat_tugas.kd_matkul = matkul.kd_matkul where rincian_surat.no_surat ='$_GET[no_surat]'";
+//$sql = "select * from surat_tugas where no_surat ='$_GET[no_surat]'";
+
+$proses = mysqli_query($koneksi,$sql);
+$record = mysqli_fetch_array($proses)
 ?>
   
   <table width="700" border="0" align="center">
@@ -89,7 +87,7 @@ $record = mysql_fetch_array($proses)
   <tr>
   <td width="80">&nbsp;</td>
   <td width="14"></td>
-  <td width="592"><p align="justify">Dengan ini kami sampaikan tugas/jadwal memberi kuliah pada semester ,     , taun akademik <?php echo $record['kurikulum']; ?> yang berlaku mulai tanggal   <?php echo $record['tgl_tugas']; ?> sampai  <?php echo $record['tgl_selesaitugas']; ?>, Adapun ketentuan pelaksanaannya sebagai beriku : </p></td>
+  <td width="592"><p align="justify">Dengan ini kami sampaikan tugas/jadwal memberi kuliah pada semester ,     , taun akademik <?php echo $record['kurikulum']; ?> yang berlaku mulai tanggal   <?php echo $record['tgl_tugas']; ?> sampai  <?php echo $record['tgl_selesaitugas']; ?>, Adapun ketentuan pelaksanaannya sebagai berikut : </p></td>
   </tr>
 </table>
 
@@ -110,8 +108,8 @@ $record = mysql_fetch_array($proses)
   <?php
   $no=1;
 $sql1 = "select * from rincian_surat inner join matkul on rincian_surat.kd_matkul = matkul.kd_matkul where rincian_surat.no_surat ='$record[no_surat]'";
-$proses1 = mysql_query($sql1);
-while ($record1 = mysql_fetch_array($proses1))
+$proses1 = mysqli_query($koneksi,$sql1);
+while ($record1 = mysqli_fetch_array($proses1))
 {		
 ?>
 
@@ -195,8 +193,8 @@ print"$tgl";
   <tr>
    <?php
 $sql1 = "select * from surat_tugas inner join dosen on surat_tugas.pejabat = dosen.nm_dosen where surat_tugas.pejabat ='$record[pejabat]'";
-$proses = mysql_query($sql1);
-$recordd = mysql_fetch_array($proses)
+$proses = mysqli_query($koneksi,$sql1);
+$recordd = mysqli_fetch_array($proses)
 ?>
   <td width="80">&nbsp;</td>
   <td></td>

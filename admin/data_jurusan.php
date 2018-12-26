@@ -114,29 +114,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
-				<ul>
+								<ul>
 					<li>
-					<a class="subnav-text" href="input_sutuga.php">
+					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_dosen.php">
+					<a class="subnav-text" href="skl/data_dosen.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_matkul.php">
+					<a class="subnav-text" href="skkp/data_matkul.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skp/data_ruang.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skt/data_ruang.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
@@ -210,15 +210,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</li>
 				</ul>
 			</li>
+            
+  
 			<li>
-				<a href="laporan_sutuga.php">
+				<a href="laporan_surat.php">
 					<i class="fa fa-file-text-o nav_icon"></i>
 					<span class="nav-text">
 					Laporan
 					</span>
 				</a>
 			</li>
-			
 			
 		</ul>
 		<ul class="logout">
@@ -381,5 +382,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="../js/proton.js"></script>
 </body>
 </html>
-   
-	

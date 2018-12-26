@@ -1,11 +1,3 @@
-
-
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <head>
 <title>SISTM : Sitem Informasi Surat Tugas Fakultas Sains dan Teknologi</title>
@@ -193,10 +185,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="profile_details_left">
 					<div class="header-right-left">
 						<!--notifications of menu start -->
-												  
-									
-								
-									
 										<div class="notification_bottom"><strong>
 											Well come Administrator !</strong></font>
 										</div> 

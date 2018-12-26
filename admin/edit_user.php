@@ -1,28 +1,26 @@
 <?php 
 	session_start();
-
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['status']==""){
 		header("location:../index.php?pesan=gagal");
 	}
 	?>
 <?php
-include '../koneksi.php';
-$username= $_SESSION['username'];
-$hasil = mysqli_query($koneksi,"select * from admin where username='$username'") or die("Gagal melakukan query.");
+include "../koneksi.php";
+$id= $_GET['id'];
+$hasil = mysqli_query($koneksi,"select * from admin where id='$id'");
 $buff = mysqli_fetch_array($hasil);
-mysqli_close($koneksi);
 ?>
 <?php
 
-if(isset($_POST['submit'])){
-	
-	$nama=htmlentities($_POST['nama']);
-	$username=htmlentities($_POST['username']);
-	$password=md5($_POST['password']);
-	$keterangan=ucwords(htmlentities($_POST['keterangan']));
+if(isset($_POST['update'])){
+	$nama=$_POST['nama'];
+	$username=$_POST['username'];
+	$password=$_POST['password'];
+	$keterangan=$_POST['keterangan'];
+	$status=$_POST['status'];
 
-	$query=mysqli_query($koneksi,"update admin set nama='$nama', username='$username', password='$password', keterangan='$keterangan' where id='$id'");
+$query=mysqli_query($koneksi,"update admin set nama='$nama', username='$username', password='$password',keterangan='$keterangan',status='$status' where id='$id'");
 	
 	if($query){
 		
@@ -38,7 +36,7 @@ if(isset($_POST['submit'])){
 	}
 		
 }else{
-	unset($_POST['submit']);
+	unset($_POST['update']);
 }
 
 
@@ -131,29 +129,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</span>
 				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
 				</a>
-				<ul>
+								<ul>
 					<li>
 					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skl/input_skl.php">
+					<a class="subnav-text" href="skl/data_dosen.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skkp/input_skkp.php">
+					<a class="subnav-text" href="skkp/data_matkul.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="skp/input_skp.php">
+					<a class="subnav-text" href="skp/data_ruang.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="skt/input_skt.php">
+					<a class="subnav-text" href="skt/data_ruang.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
@@ -201,32 +199,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="data_jurusan.php">
+					<a class="subnav-text" href="surat_tugas/data_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_dosen.php">
+					<a class="subnav-text" href="skl/data_skl.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_matkul.php">
+					<a class="subnav-text" href="skkp/data_skkp.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skp/data_skp.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="data_ruang.php">
+					<a class="subnav-text" href="skt/data_skt.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
+            
+  
+			<li>
+				<a href="laporan_surat.php">
+					<i class="fa fa-file-text-o nav_icon"></i>
+					<span class="nav-text">
+					Laporan
+					</span>
+				</a>
+			</li>
+			
 		</ul>
 		<ul class="logout">
 			<li>
@@ -299,9 +308,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="main-grid">
          
         <div class="agile-grids">	
-				<!-- tables -->
-				
-				
+				<!-- tables -->	
 				<div class="table-heading">
 					<h2>Edit Data User</h2>
 				</div>
@@ -329,14 +336,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group"> 
 												<label for="inputPassword3" class="col-sm-2 control-label">Password</label> 
 												<div class="col-sm-9"> 
-													<input type="text" name="password" class="form-control" id="password" placeholder="Password" value="<?php echo $buff['password']; ?>"> 
+													<input type="password" name="password" class="form-control" id="password" placeholder="Password" value="<?php echo $buff['password']; ?>"> 
 												</div> 
 											</div> 
-                                            
-                                            <div class="form-group">
-											<label for="keterangan" class="col-sm-2 control-label">Keterangan</label>
-											<div class="col-sm-8"><textarea name="keterangan" id="keterangan" cols="50" rows="4" class="form-control1" value="<?php echo $buff['keterangan']; ?>" ></textarea></div>
-										</div>
+                                           <div class="form-group"> 
+												<label for="inputKeterangan" class="col-sm-2 control-label">Keterangan</label> 
+												<div class="col-sm-9"> 
+													<input type="text" name="keterangan" class="form-control" id="password" placeholder="Password" value="<?php echo $buff['keterangan']; ?>"> 
+												</div> 
+											</div>
 										<div class="form-group">
 											<label for="selector1" class="col-sm-2 control-label">Status</label>
 											<div class="col-sm-8"><select name="status" id="status" class="form-control1">
@@ -349,7 +357,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 												</div> 
 											</div> 
 											<div class="col-sm-offset-2"> 
-												<button type="submit" name="submit" class="btn btn-default w3ls-button">Update</button> 
+												<button type="update" name="update" class="btn btn-default w3ls-button">Update</button> 
 											</div> 
 										</form> 
 									</div>
@@ -358,15 +366,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>	
 					</div>
 		
-        
-        
-        
-        
-        
-			
-				
-        
-        <!--  end product-table................................... --> 
+						</tbody>
+					  </table>
 					</div>  
 				</div>
 				<!-- //tables -->

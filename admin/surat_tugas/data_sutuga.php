@@ -1,11 +1,12 @@
 <?php 
 	session_start();
-	include '../../koneksi.php';
+include '../../koneksi.php';
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['status']==""){
 		header("location:../../index.php?pesan=gagal");
 	}
 	?>
+
 <!DOCTYPE html>
 <head>
 <title>SISAMIK : Sistem Informasi Surat Akademik</title>
@@ -83,7 +84,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					<a class="subnav-text" href="input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
@@ -150,27 +151,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					<a class="subnav-text" href="data_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="../skl/input_skl.php">
+					<a class="subnav-text" href="../skl/data_skl.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="../skkp/input_skkp.php">
+					<a class="subnav-text" href="../skkp/data_skkp.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="../skp/input_skp.php">
+					<a class="subnav-text" href="../skp/data_skp.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="../skt/input_skt.php">
+					<a class="subnav-text" href="../skt/data_skt.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
@@ -219,9 +220,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="header-right-left">
 						<!--notifications of menu start -->						
 										<div class="notification_bottom"><strong>
-										
-											Well come Administrator <?php echo $_SESSION['username']; ?> !</strong></font>
-										</div> 
+											Well come Administrator <?php echo $_SESSION['username']; ?>!</strong></font>
+										</div>
 							<div class="clearfix"> </div>
 						</ul>
 					</div>	
@@ -251,7 +251,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
          
         <div class="agile-grids">	
 				<!-- tables -->
-				
 				
 				<div class="table-heading">
 					<h2>Data Surat Tugas Mengajar</h2>

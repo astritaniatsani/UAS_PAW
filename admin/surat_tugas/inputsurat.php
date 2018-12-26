@@ -84,7 +84,7 @@ $bulan = Date("m");
 $tahun = Date("Y");
 
 ?>
-<form id="form1" name="form1" method="post" action="pemesanan_simpan.php"   enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="pemesanan_simpan.php" enctype="multipart/form-data">
   <table width="700" border="0" align="center">
       <tr>
       <td width="14%" align="left" valign="middle">No Surat</td>
@@ -92,7 +92,7 @@ $tahun = Date("Y");
       <td width="41%" align="left" valign="top"><input name="nosurattxt" type="text" id="nosurattxt" value="<?php echo "B/Uin.05/III.7/PP.00.9/$bulan/$tahun" ?>" size="30" maxlength="50" /></td>
      
     </tr>
-	</tr>
+	<tr>
       <td align="left" valign="middle">Yang Memberi Tugas</td>
       <td align="left" valign="middle">:</td>
       <td colspan="4" align="left" valign="top"><select name="pejabat">
@@ -110,7 +110,7 @@ $tahun = Date("Y");
       <td width="14%" align="left" valign="middle">Yang Diberi Tugas</td>
       <td width="1%" align="left" valign="middle">:</td>
       <td width="41%" align="left" valign="middle"><select name="kepada">
-	  <?php include "koneksi.php";	
+	  <?php include "../../koneksi.php";	
 		$tampil = mysqli_query($koneksi,"select * from dosen order by nm_dosen asc");
 		while($data = mysqli_fetch_array($tampil))
 		{

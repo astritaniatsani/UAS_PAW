@@ -86,7 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					<a class="subnav-text" href="input_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
@@ -153,27 +153,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</a>
 				<ul>
 					<li>
-					<a class="subnav-text" href="surat_tugas/input_sutuga.php">
+					<a class="subnav-text" href="data_sutuga.php">
 					Surat Tugas Mengajar
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="../skl/input_skl.php">
+					<a class="subnav-text" href="../skl/data_skl.php">
 					Surat Keterangan Lulus
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="../skkp/input_skkp.php">
+					<a class="subnav-text" href="../skkp/data_skkp.php">
 					Surat Keterangan Kerja Praktik
 					</a>
 					</li>
                     <li>
-					<a class="subnav-text" href="../skp/input_skp.php">
+					<a class="subnav-text" href="../skp/data_skp.php">
 					Surat Keterangan Penelitian
 					</a>
 					</li>
 					<li>
-					<a class="subnav-text" href="../skt/input_skt.php">
+					<a class="subnav-text" href="../skt/data_skt.php">
 					Surat Keterangan Tahfidz
 					</a>
 					</li>
