@@ -26,15 +26,55 @@ return true;
 <script type="text/javascript">
 	$(document).ready(function(){
 	function cari_menu(){
-	
-	
-	$('#nimmahasiswatxt').change(function() {
-		cari_menu();
-		$("#jmltxt").focus()	
-    });		
-		
-})		
+    var kode=$("#nimtxt").val();
+      if(kode!=""){
+        $.ajax({
+          type:"post",
+          url:"cari_menu.php",
+          data:"kode="+kode,
+          success:function(data){
+          $("#mhstxt").val(data)
+          }
+        });
+      }                                      
+   
+  var kode1=$("#nimtxt").val();
+      if(kode1!=""){
+        $.ajax({
+          type:"post",
+          url:"cari_menu.php",
+          data:"kode1="+kode1,
+          success:function(data){
+          $("#jurusantxt").val(data)
+          }
+        });
+      } 
+  var kode2=$("#niptxt").val();
+      if(kode2!=""){
+        $.ajax({
+          type:"post",
+          url:"cari_menu.php",
+          data:"kode2="+kode2,
+          success:function(data){
+          $("#pejabattxt").val(data)
+          }
+        });
+      } 
+  }
+  
+  $('#nimtxt').change(function() {
+    cari_menu();
+    $("#jmltxt").focus()  
+    });
+
+  $('#niptxt').change(function() {
+    cari_menu();
+    $("#jmltxt").focus()  
+    });   
+    
+})    
 </script>
+
 
 <?php
 
@@ -51,7 +91,7 @@ $tahun = Date("Y");
   <th align="left" valign="middle" bgcolor="#9D0000" scope="col"><font color="#FFFFFF" face="Goudy Old Style" size="4"><center><b>SURAT KETERANGAN KERJA PRAKTIK</b></th>
 </tr>
 </table><br>
-<form id="form1" name="form1" method="post" action="pemesanan_simpan.php">
+<form id="form1" name="form1" method="post" action="pemesanan_simpan.php"> 
   <table width="700" border="0" align="center">
       <tr>
       <td width="14%" align="left" valign="middle">No Surat</td>
@@ -66,26 +106,29 @@ $tahun = Date("Y");
       
     </tr>
     <tr>
+      <td align="left" valign="middle">Nip</td>
+      <td align="left" valign="middle">:</td>
+      <td colspan="4" align="left" valign="top"><input name="niptxt" type="text" id="niptxt" value="<?php echo $_POST['niptxt']; ?>" size="30" maxlength="100"/></td>
+    </tr>
       <td align="left" valign="middle">Yang Menandatangani </td>
       <td align="left" valign="middle">:</td>
       <td colspan="4" align="left" valign="top"><input name="pejabattxt" value="<?php echo $_POST['pejabattxt']; ?>" type="text" id="pejabattxt" size="20" readonly="readonly" /></td>
     </tr>
     <tr>
+      <td align="left" valign="middle">Nim </td>
+      <td align="left" valign="middle">:</td>
+      <td align="left" valign="top"><input name="nimtxt" type="text" id="nimtxt"pejabattxt" size="20"  /></td>
       <td align="left" valign="middle">Nama Mahasiswa</td>
       <td align="left" valign="middle">:</td>
-      <td align="left" valign="top"><select name="mhstxt">
-    <?php 
-    $tampil = mysqli_query($koneksi,"select * from mahasiswa order by nim asc");
-    while($data = mysqli_fetch_array($tampil))
-    {
-      echo'<option value="'.$data['nama'].'">'.$data['nama'].'</option>';
-    }
-    ?>
-    </select></td></tr>
+      <td align="left" valign="top"><input name="mhstxt" type="text" id="mhstxt"pejabattxt" size="20"  /></td></tr>
       <tr>
       <td align="left" valign="middle">Semester</td>
       <td align="left" valign="middle">:</td>
-      <td align="left" valign="top"><input name="semestertxt" type="text" id="semestertxt" size="30" maxlength="50" /></td></tr>
+      <td align="left" valign="top"><input name="semestertxt" type="text" id="semestertxt" size="30" maxlength="50" /></td>
+      <td align="left" valign="middle">Jurusan</td>
+      <td align="left" valign="middle">:</td>
+      <td align="left" valign="top"><input name="jurusantxt" type="text" id="jurusantxt" size="30" maxlength="50" /></td>
+    </tr>
     <tr>
       <td align="left" valign="middle">Tanggal</td>
       <td align="left" valign="middle">:</td>

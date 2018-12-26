@@ -1,15 +1,17 @@
 <?php 
-session_start();
+	session_start();
 
-if(isset($_SESSION['username'])){
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
 
-	//koneksi terpusat
-	include "../koneksi.php";
-	$username=$_SESSION['username'];
+
 ?>
 <!DOCTYPE html>
 <head>
-<title>SISuTas : Sitem Informasi Surat Tugas </title>
+<title>SISAMIK : Sistem Informasi Surat Akademik</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Colored Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -29,7 +31,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script src="../js/jquery2.0.3.min.js"></script>
 <script src="../js/modernizr.js"></script>
 <script src="../js/jquery.cookie.js"></script>
+<script src="../js/screenfull.js"></script>
+<script>
+	$(function () {
+		$('#supported').text('Supported/allowed: ' + !!screenfull.enabled);
 
+		if (!screenfull.enabled) {
+			return false;
+		}
+
+		$('#toggle').click(function () {
+			screenfull.toggle($('#container')[0]);
+		});	
+	});
+</script>
 <!-- tables -->
 <link rel="stylesheet" type="text/css" href="../css/table-style.css" />
 <link rel="stylesheet" type="text/css" href="../css/basictable.css" />
@@ -67,35 +82,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <nav class="main-menu">
 		<ul>
 			<li>
-				<a href="index.php">
+				<a href="dosen.php">
 					<i class="fa fa-home nav_icon"></i>
 					<span class="nav-text">
 					Dashboard
 					</span>
 				</a>
 			</li>
-			<li class="has-subnav">
-				<a href="javascript:;">
-				<i class="fa fa-check-square-o nav_icon"></i>
-				<span class="nav-text">
-					Surat Tugas
-				</span>
-				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
-				</a>
-				<ul>
-					<li>
-					<a class="subnav-text" href="input_sutuga.php">
-					Input Surat Tugas
-					</a>
-					</li>
-					<li>
-					<a class="subnav-text" href="data_sutuga.php">
-					Data Surat Tugas
-					</a>
-					</li>
-				</ul>
-			</li>
-            
             	<li class="has-subnav">
 				<a href="javascript:;">
 				<i class="icon-table nav-icon"></i>
@@ -125,24 +118,46 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					Ruang
 					</a>
 					</li>
+				</ul>
+			</li>
+			<li class="has-subnav">
+				<a href="javascript:;">
+				<i class="fa fa-file-text-o nav_icon"></i>
+				<span class="nav-text">
+					Data Surat Akademik
+				</span>
+				<i class="icon-angle-right"></i><i class="icon-angle-down"></i>
+				</a>
+				<ul>
 					<li>
-					<a class="subnav-text" href="data_pejabat.php">
-					Pejabat
+					<a class="subnav-text" href="data_sutuga.php">
+					Surat Tugas Mengajar
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="data_skl.php">
+					Surat Keterangan Lulus
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="data_skkp.php">
+					Surat Keterangan Kerja Praktik
+					</a>
+					</li>
+                    <li>
+					<a class="subnav-text" href="data_skp.php">
+					Surat Keterangan Penelitian
+					</a>
+					</li>
+					<li>
+					<a class="subnav-text" href="data_skt.php">
+					Surat Keterangan Tahfidz
 					</a>
 					</li>
 				</ul>
 			</li>
- 
-			<li>
-				<a href="laporan_sutuga.php">
-					<i class="fa fa-file-text-o nav_icon"></i>
-					<span class="nav-text">
-					Laporan
-					</span>
-				</a>
-			</li>
-			
-			
+            
+  
 		</ul>
 		<ul class="logout">
 			<li>
@@ -164,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</nav>
 		<section class="title-bar">
 			<div class="logo">
-				<h1><a href="index.html"><img src="../images/logo.png" alt="" />SISuTas</a></h1>
+				<h1><a href="dosen.php"><img src="../images/logo.png" alt="" />SISAMIK</a></h1>
 			</div>
 			<div class="w3l_search">
 				<form action="#" method="post">
@@ -177,8 +192,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="header-right-left">
 						<!--notifications of menu start -->
 										<div class="notification_bottom"><strong>
-											Well come Administrator !</strong></font>
-										</div> 	
+											Well come Dosen  <?php echo $_SESSION['username']; ?>!</strong></font>
+										</div> 
+									
 								</ul>
 							</li>	
 							<div class="clearfix"> </div>
@@ -194,9 +210,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									</div>	
 								</a>
 								<ul class="dropdown-menu drp-mnu">
-									<li> <a href="data_user.php"><i class="fa fa-cog"></i> Settings</a> </li> 
 									<li> <a href="detail_user.php"><i class="fa fa-user"></i> Profile</a> </li> 
-									<li> <a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
+									<li> <a href="../logout.php"><i class="fa fa-sign-out"></i> Logout</a> </li>
 								</ul>
 							</li>
 						</ul>
@@ -207,42 +222,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"> </div>
 		</section>
 		<div class="main-grid">
-         
         <div class="agile-grids">	
 				<!-- tables -->
-				
+			
 				<div class="table-heading">
-					<h2>Data User</h2>
+					<h2>Data Surat Tahfidz</h2>
 				</div>
-       
+
 				<div class="agile-tables">
+
 					    <table id="table">
 						<thead>
 						  <tr>
-							<th>Id</th>
-							<th>Nama Lengkap</th>
-							<th>Username</th>
-							<th>Password</th>
-							<th>Keterangan</th>
+							<th width="15%">No</th>
+							<th width="15%">No Surat</th>
+							<th width="15%">Yang Menyetujui</th>
+							<th width="15%">Nama Mahasiswa</th>
+
 						  </tr>
 						</thead>
 						<tbody>
-						   <?php
-		$view=mysql_query("select * from admin order by id asc");
-		
-		
-		while($row=mysql_fetch_array($view)){
-		?>	
+<?php
+$no=1;
+
+/*$sql = "select * from surat_tahfidz, rincian_surat_tahfidz WHERE surat_tahfidz.no_surat_tahfidz=rincian_surat_tahfidz.no_surat_tahfidz";*/
+$sql="select * from surat_tahfidz order by id desc";
+$proses = mysqli_query($koneksi,$sql);
+while ($row = mysqli_fetch_array($proses))
+{
+//$tgl = substr($proses['tgl_tahfidz'],8,2)."-".substr($record['tgl_tahfidz'],5,2)."-". substr($record['tgl_tahfidz'],0,4);		
+?>	
 		<tr>
-            <td><?php echo $row['id'];?></td>
-             <td><?php echo $row['nama'];?></td>
-            <td><?php echo $row['username'];?></td>
-            <td><?php echo $row['password'];?></td>
-            <td><?php echo $row['keterangan'];?></td>
+            <td><?php echo $no ?></td>
+			<td><?php echo $row['no_surat_tahfidz'];?></td>
+  			<td><?php echo $row['pejabat'];?></td>
+			<td><?php echo $row['nm_mhs']; ?></td>
+
         </tr>
-		<?php
-		}
-		?>
+		<?php $no++;}?>
         
         <!--  end product-table................................... --> 
         </form>
@@ -254,16 +271,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!-- //tables -->
 			</div>
 		</div>
-		
 	</section>
 	<script src="../js/bootstrap.js"></script>
 	<script src="../js/proton.js"></script>
 </body>
 </html>
-<?php
-}else{
-	session_destroy();
-	header('Location:../index.php?status=Silahkan Login');
-}
-?>
+   
 	

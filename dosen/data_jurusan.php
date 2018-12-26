@@ -223,45 +223,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="main-grid">
         <div class="agile-grids">	
 				<!-- tables -->
-			<div class="agile-tables">
-			<div class="w3l-table-info">
-			  <h3>Tabel Data Mata Kuliah</h3>
-			    <table id="table">
-				<thead>
-				  <tr>
-					<th>No</th>
-					<th>Prodi</th>
-					<th>Kurikulum</th>
-					<th>Kode Mata Kuliah</th>
-					<th>Nama Mata Kuliah</th>	
-                    <th>Sifat</th>
-					<th>Semester</th>
-					<th>Jumlah SKS</th>
+<div class="agile-tables">
+					<div class="w3l-table-info">
+					  <h3>Tabel Data Jurusan</h3>
+					    <table id="table">
+						<thead>
+						  <tr>
+							<th>No</th>
+							<th>Kode Jurusan</th>
+							<th>Nama Jurusan</th>
+							<th>Jenjang Studi</th>
 
-				  </tr>
-				</thead>
+						  </tr>
+						</thead>
 						<tbody>
 						   <?php
-		$view=mysqli_query($koneksi,"select * from matkul order by kd_matkul asc");
+		$view=mysqli_query($koneksi,"select * from jurusan order by kd_jur asc");
 		
 		$no=0;
 		while($row=mysqli_fetch_array($view)){
 		?>	
 		<tr>
             <td><?php echo $no=$no+1;?></td>
-             <td><?php echo $row['prodi'];?></td>
-            <td><?php echo $row['kurikulum'];?></td>
-            <td><?php echo $row['kd_matkul'];?></td>
-            <td><?php echo $row['nm_matkul'];?></td>
-            <td><?php echo $row['sifat'];?></td>
-            <td><?php echo $row['semester'];?></td>
-            <td><?php $jumlah=0;
-			 $jumlah=$row['jml_sks_T']+
-            $row['jml_sks_P']+
-            $row['jml_sks_PL']; 
-			echo $jumlah ?></td>
-           
-            
+            <td><?php echo $row['kd_jur'];?></td>
+            <td><?php echo $row['nm_jur'];?></td>
+            <td><?php echo $row['jenjang_studi'];?></td>
         </tr>
 		<?php
 		}

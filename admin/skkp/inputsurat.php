@@ -27,27 +27,27 @@ return true;
 	  $("#tglakhir").datepicker({
       showOn: "both", buttonImage: "../../images/calendar.png", buttonImageOnly: true, changeMonth: true, changeYear: true, dateFormat: "dd-mm-yy"});
 	function cari_menu(){
-		var kode=$("#nimmahasiswatxt").val();
-			if(kode!=""){
-				$.ajax({
-					type:"post",
-					url:"cari_menu.php",
-					data:"kode="+kode,
-					success:function(data){
-					$("#nmmahasiswatxt").val(data)
-					}
-				});
-			}		                                   
-	 
-	}
-	
-	$('#nimmahasiswatxt').change(function() {
-		cari_menu();
-		$("#jmltxt").focus()	
-    });		
-		
-})		
+  var kode2=$("#niptxt").val();
+      if(kode2!=""){
+        $.ajax({
+          type:"post",
+          url:"cari_menu.php",
+          data:"kode2="+kode2,
+          success:function(data){
+          $("#pejabattxt").val(data)
+          }
+        });
+      } 
+  }
+  
+  $('#niptxt').change(function() {
+    cari_menu();
+    $("#jmltxt").focus()  
+    });   
+    
+})    
 </script>
+
 
 <?php
 include '../../koneksi.php';
@@ -69,30 +69,27 @@ $tahun = Date("Y");
     <tr>
       <td width="14%" align="left" valign="middle">Tujuan Kerja Praktik</td>
       <td width="1%" align="left" valign="middle">:</td>
-      <td width="41%" align="left" valign="middle"><input name="kepadatxt" type="text" id="kepada" size="30" maxlength="100"/></td>
+      <td width="41%" align="left" valign="middle"><input name="kepadatxt" type="text" id="kepadatxt" size="30" maxlength="100"/></td>
       
+    </tr>
+    </tr>
+      <td align="left" valign="middle">Nip</td>
+      <td align="left" valign="middle">:</td>
+      <td colspan="4" align="left" valign="top"><input name="niptxt" type="text" id="niptxt" size="30" maxlength="100"/></td>
     </tr>
 	</tr>
       <td align="left" valign="middle">Yang Menyetujui</td>
       <td align="left" valign="middle">:</td>
-      <td colspan="4" align="left" valign="top"><select name="pejabattxt">
-	  <?php include "koneksi.php";
-		$tampil = mysqli_query($koneksi,"select * from dosen order by nm_dosen asc");
-		while($data = mysqli_fetch_array($tampil))
-		{
-			echo'<option value="'.$data['nm_dosen'].'">'.$data['nm_dosen'].'</option>';
-		}
-		?>
-		</select>
-		</td>
+      <td colspan="4" align="left" valign="top"><input name="pejabattxt" type="text" id="pejabattxt" size="30" maxlength="100" readonly="readonly" /></td>
     </tr>
     <tr>
       <td align="left" valign="middle">Tanggal</td>
       <td align="left" valign="middle">:</td>
-      <td align="left" valign="top"><input name="tglawal" type="text" id="tglawal" value="<?php echo date('d-m-Y') ?>" size="6" readonly="readonly" /> 
-	  Sampai
-	  <input name="tglakhir" type="text" id="tglakhir" value="<?php echo date('d-m-Y') ?>" size="6" readonly="readonly" /></td>
-      
+      <td align="left" valign="top"><input name="tglawal" type="text" id="tglawal" value="<?php echo $record['tgl_awal_skkp']; ?>" size="9" maxlength="5" readonly="readonly" /> 
+    Sampai <input name="tglakhir" value="<?php echo $record['tgl_slsai_skkp']; ?>" type="text" id="tglakhir"  size="9" maxlength="5" readonly="readonly" /></td>
+    <td align="left" valign="middle">Akademik</td>
+      <td align="left" valign="middle">:</td>
+      <td align="left" valign="top"><input name="akademiktxt" type="text" id="akademiktxt" size="30" maxlength="50" /></td>
     </tr>
       </table></td>
     </tr>

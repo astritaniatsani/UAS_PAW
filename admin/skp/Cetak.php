@@ -95,47 +95,62 @@ break;
   <th colspan="5" align="center" scope="col">
 </table>
 <p>
-
-
 <table width="600" border="0" align="center">
   <tr>
-  <td colspan="3" align="center"><b><font face="Times New Roman, Times, serif" size="5">SURAT KETERANGAN<br></td>
+  <td colspan="3">Nomor&emsp;&emsp;:&ensp;<?php echo $record['no_surat_kp']; ?></td>
   </tr>
   <tr>
-  <td  colspan="3" align="center">Nomor  : <?php echo $record['no_surat_tahfidz']; ?></td>
+  <td colspan="3">Lampiran&emsp;:&ensp; - </td>
   </tr>
   <tr>
-  <td colspan="3" width="592"><p style="text-align: justify; text-indent: 0.5in;">Dekan Fakultas Sains dan Teknologi UIN Sunan Gunung Djati Bandung dengan ini menerangkan :  </p></td>
+  <td colspan="3">Perihal&emsp;&emsp;:&ensp;<b><i>Permohonan Izin Kerja Praktik</td>
+  </tr>
+  <tr>
+  <td>Kepada Yth . </p></td>
+  </tr>
+  <tr>
+  <td><?php echo $record['tujuan']; ?></p></td>
+  </tr>
+   <tr><td>&nbsp;</td></tr>
+  <tr>
+  <td colspan="3"><p style="text-align: justify; text-indent: 0.5in;"><i>Assalamu'alaikum Wr. Wb</p></td>
+  </tr>
+  <tr>
+  <td colspan="3" width="592"><p style="text-align: justify; text-indent: 0.5in;">Dekan Fakultas Sains dan Teknologi UIN Sunan Gunung Djati Bandung dengan ini menerangkan bahwa :  </p></td>
   </tr>
   <tr><td>&nbsp;</td></tr>
+  <td colspan="3"><p style="text-align: justify; text-indent: 0.5in;">Nama&emsp;&emsp;&emsp;:&ensp;<?php echo $record['nm_mhs']; ?></p></td>
+  </tr>
+  <tr>
+  <td colspan="3"><p style="text-align: justify; text-indent: 0.5in;">Nim&emsp;&emsp;&emsp;&ensp;&nbsp;:&ensp;<?php echo $record['nim']; ?></p></td>
+  </tr>
+  <tr>
+  <td colspan="3"><p style="text-align: justify; text-indent: 0.5in;">Jurusan&emsp;&emsp;&ensp;:&ensp;<?php echo $record['jurusan']; ?></p></td>
+  </tr>
    <tr>
-  <td><p style="text-align: justify; text-indent: 0.5in;">Nama</td>
-  <td>:</td>
-  <td><?php echo $record['nm_mhs']; ?></td>
-  </tr>
-  <tr>
-  <td><p style="text-align: justify; text-indent: 0.5in;">Nim</td>
-  <td>:</td>
-  <td><?php echo $record['nim']; ?></td>
-  </tr>
-  <tr>
-  <td><p style="text-align: justify; text-indent: 0.5in;">Jurusan</p></td>
-  <td>:</td>
-  <td><?php echo $record['jurusan']; ?></td>
+  <td colspan="3"><p style="text-align: justify; text-indent: 0.5in;">Semester&emsp;&emsp;:&ensp;<?php echo $record['semester']; ?></p></td>
   </tr>
    <tr><td>&nbsp;</td></tr>
   <tr>
  
-  <td colspan="3" align="justify">bahwa yang bersangkutan telah mengikuti Ujian Tahfidz Al-Qur'an yang diselenggarakan oleh Tahfidz Al-Qur'an Fakultas Sains dan Teknologi UIN Sunan Gunung Djati Bandung sebagai salah satu syarat mengikuti Ujian Komprehensif dan yang bersangkutan di nyatakan Lulus Hafidz 1 Juz Al-Qur'an dengan Nilai 
-    <?php if($record['nilai']>= 80)
-    {
-      echo " A (".$record['nilai'];
-      echo "). ";
-    }
-  ?></td>
+  <td colspan="3" align="justify">adalah mahasiswa Fakultas Sains dan Teknologi Universitas Islam Negeri Sunan Gunung Djati Bandung tahun Akademik <?php echo $record['akademik']; ?>. Bermaksud melakukan Uji Karakteristik SEM Sample Besi (Ukuran3x10x10 mm ) dalam rangka tugas akhir dengan judul :<b><i>"<?php echo $record['judul']; ?>," dengan dosen pembimbing .  </td>
+  </tr>
+  <tr>
+   <td colspan="2"><p style="text-align: justify; text-indent: 0.5in;">1&emsp;&emsp;&emsp;<?php echo $record['dospem1']; ?> </p></td>
+   <td>(Pembimbing I)</td>
+  </tr>
+   <tr>
+  <td colspan="2"><p style="text-align: justify; text-indent: 0.5in;">2&emsp;&emsp;&emsp;<?php echo $record['dospem2']; ?> </p></td>
+  <td>(Pembimbing II)</td>
+  </tr>
+   <tr>
+  <td colspan="3" width="592"><p style="text-align: justify; text-indent: 0.5in;">Untuk itu kami mohon Bapak/Ibu dapat membantu mahasiswa kami dlam pelaksaaan penelitian terseut.</p</td>
   </tr>
   <tr>
   <td colspan="3" width="592"><p style="text-align: justify; text-indent: 0.5in;">Demikian keterangan ini dibuat untuk digunakan sebagaimana mestinya. </p</td>
+  </tr>
+  <tr>
+  <td colspan="3" width="592"><p style="text-align: justify; text-indent: 0.5in;"><b><i>Wassalamu'alaikum Wr. Wb </p</td>
   </tr>
   <tr><td>&nbsp;</td></tr>
   <tr><td>&nbsp;</td></tr>

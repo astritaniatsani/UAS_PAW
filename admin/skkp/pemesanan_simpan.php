@@ -5,7 +5,7 @@
 <?php
 if(isset($_POST['tambahbtn'])){
 	
-		$sql = mysqli_query($koneksi,"INSERT INTO rincian_surat_kkp(no_surat_kkp,kepada,nm_mhs,semester) VALUES ('$_POST[nosurattxt]','$_POST[kepadatxt]','$_POST[mhstxt]','$_POST[semestertxt]')");
+		$sql = mysqli_query($koneksi,"INSERT INTO rincian_surat_kkp(no_surat_kkp,nim,nm_mhs,semester,jurusan) VALUES ('$_POST[nosurattxt]','$_POST[nimtxt]','$_POST[mhstxt]','$_POST[semestertxt]','$_POST[jurusantxt]')");
 		include "pemesanan.php";
 	
 }else {
@@ -13,7 +13,7 @@ if(isset($_POST['tambahbtn'])){
 			$tglawal = substr($_POST['tglawal'],6,4)."-".substr($_POST['tglawal'],3,2)."-". substr($_POST['tglawal'],0,2);
 			$tglakhir = substr($_POST['tglakhir'],6,4)."-".substr($_POST['tglakhir'],3,2)."-". substr($_POST['tglakhir'],0,2);
 			
-			$sql1 = mysqli_query($koneksi,"INSERT INTO surat_kerja_praktik(no_surat_kkp,tgl_awal_skkp,tgl_slsai_skkp,pejabat) VALUES ('$_POST[nosurattxt]','$tglawal','$tglakhir','$_POST[pejabattxt]')");
+			$sql1 = mysqli_query($koneksi,"INSERT INTO surat_kerja_praktik(no_surat_kkp,tgl_awal_skkp,tgl_slsai_skkp,pejabat,nip,kepada,akademik) VALUES ('$_POST[nosurattxt]','$tglawal','$tglakhir','$_POST[pejabattxt]','$_POST[niptxt]','$_POST[kepadatxt]','$_POST[akademiktxt]')");
 			 if ($sql1) {
 				echo "<script>alert('Penyimpanan data Surat berhasil !')</script>";
 				include "input_skkp.php";

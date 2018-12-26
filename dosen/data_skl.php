@@ -7,6 +7,7 @@
 	}
 	?>
 
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -223,50 +224,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="main-grid">
         <div class="agile-grids">	
 				<!-- tables -->
-			<div class="agile-tables">
-			<div class="w3l-table-info">
-			  <h3>Tabel Data Mata Kuliah</h3>
-			    <table id="table">
-				<thead>
-				  <tr>
-					<th>No</th>
-					<th>Prodi</th>
-					<th>Kurikulum</th>
-					<th>Kode Mata Kuliah</th>
-					<th>Nama Mata Kuliah</th>	
-                    <th>Sifat</th>
-					<th>Semester</th>
-					<th>Jumlah SKS</th>
+	
+				<div class="table-heading">
+					<h2>Data Surat Lulus</h2>
+				</div>
 
-				  </tr>
-				</thead>
+				<div class="agile-tables">
+
+					    <table id="table">
+						<thead>
+						  <tr>
+							<th>No</th>
+							<th>No Surat</th>
+							<th>Yang Menyetujui</th>
+							<th>Mahasiswa</th>
+							<th>Jurusan</th>
+							<th>Tgl Lulus</th>
+
+						  </tr>
+						</thead>
 						<tbody>
-						   <?php
-		$view=mysqli_query($koneksi,"select * from matkul order by kd_matkul asc");
-		
-		$no=0;
-		while($row=mysqli_fetch_array($view)){
-		?>	
-		<tr>
-            <td><?php echo $no=$no+1;?></td>
-             <td><?php echo $row['prodi'];?></td>
-            <td><?php echo $row['kurikulum'];?></td>
-            <td><?php echo $row['kd_matkul'];?></td>
-            <td><?php echo $row['nm_matkul'];?></td>
-            <td><?php echo $row['sifat'];?></td>
-            <td><?php echo $row['semester'];?></td>
-            <td><?php $jumlah=0;
-			 $jumlah=$row['jml_sks_T']+
-            $row['jml_sks_P']+
-            $row['jml_sks_PL']; 
-			echo $jumlah ?></td>
-           
-            
-        </tr>
 		<?php
-		}
-		?>
-        
+$no=1;
+$sql = "select * from surat_lulus order by id desc";
+$proses = mysqli_query($koneksi,$sql);
+while ($row = mysqli_fetch_array($proses))
+{
+//$tgl = substr($record['tanggal'],8,2)."-".substr($record['tanggal'],5,2)."-". substr($record['tanggal'],0,4);		
+?>	
+		<tr>
+            <td><?php echo $no ?></td>
+			<td><?php echo $row['no_surat_lulus'];?></td>
+			<td><?php echo $row['nm_dosen'];?></td>
+            <td><?php echo $row['nm_mhs'];?></td>
+            <td><?php echo $row['jurusan'];?></td>
+            <td><?php echo $row['tgl_lulus'];?></td>
+			
+        </tr>
+		<?php $no++;}?>
         <!--  end product-table................................... --> 
         </form>
 
