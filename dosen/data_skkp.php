@@ -1,6 +1,6 @@
 <?php 
 	session_start();
-
+	include '../koneksi.php';
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['status']==""){
 		header("location:../index.php?pesan=gagal");

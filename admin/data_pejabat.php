@@ -25,13 +25,6 @@ if(isset($_POST['submit'])){
 
 ?>
 
-
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <head>
 <title>SISTM : Sitem Informasi Surat Tugas Fakultas Sains dan Teknologi</title>
@@ -170,17 +163,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</li>
 				</ul>
 			</li>
-            
-  
-			<li>
-				<a href="laporan_sutuga.php">
+<!--<li>
+				<a href="surat_tugas/laporan_sutuga.php">
 					<i class="fa fa-file-text-o nav_icon"></i>
 					<span class="nav-text">
 					Laporan
 					</span>
 				</a>
-			</li>
-			
+			</li>-->	
 			
 		</ul>
 		<ul class="logout">

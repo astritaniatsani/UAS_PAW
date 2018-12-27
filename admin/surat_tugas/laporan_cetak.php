@@ -1,15 +1,11 @@
-<?php
-session_start();
-if ($_SESSION['username'] = $username)
-{
-$koneksi=mysql_connect("localhost","root","") or die(mysql_error());
-mysql_select_db("sutuga",$koneksi);
-$query=mysql_query("select * from admin where username='$username'",$koneksi);
-$row=mysql_fetch_array($query);
-}
-else
-header("location:bukan_member.php");
-?>
+<?php 
+  session_start();
+  include '../../koneksi.php';
+  // cek apakah yang mengakses halaman ini sudah login
+  if($_SESSION['status']==""){
+    header("location:../../index.php?pesan=gagal");
+  }
+  ?>
 
 <table width="700" border="0" align="center">
   <tr>
@@ -35,13 +31,13 @@ header("location:bukan_member.php");
 </table>
 <table width="700" border="0" align="center" cellpadding="4" cellspacing="0">
   <tr>
-    <th colspan="5" align="center" scope="col">LAPORAN SURAT TUGAS MENGAJAR</th>
+    <th colspan="5" align="center" scope="col">LAPORAN SURAT AKADEMIK</th>
   </tr>
   <tr>
     <th colspan="5" align="center" scope="col">PERIODE</th>
   </tr>
   <tr>
-    <th colspan="5" align="center" scope="col"><b><font color="#990000"><?php echo $_POST['tglmulaitxt'] ?> S/D <?php echo $_POST['tglsampaitxt'] ?></font></b></th>
+    <th colspan="5" align="center" scope="col"><b><font color="#990000"><?php echo $_POST['tglmulai'] ?> S/D <?php echo $_POST['tglsampai'] ?></font></b></th>
   </tr>
   <tr>
     <th colspan="5" align="center" scope="col"><hr /></th>
@@ -59,8 +55,8 @@ $no=1;
 $tgl1 = substr($_POST['tglmulai'],6,4)."-".substr($_POST['tglmulai'],3,2)."-". substr($_POST['tglmulai'],0,2); 	
 $tgl2 = substr($_POST['tglsampai'],6,4)."-".substr($_POST['tglsampai'],3,2)."-". substr($_POST['tglsampai'],0,2); 	
 $sql = "select * from surat_tugas where tgl_tugas >='$tgl1' and tgl_tugas <='$tgl2' order by id desc";
-$proses = mysql_query($sql);
-while ($record = mysql_fetch_array($proses))
+$proses = mysqli_query($koneksi,$sql);
+while ($record = mysqli_fetch_array($proses))
 {
 $tgl = substr($record['tgl_tugas'],8,2)."-".substr($record['tgl_tugas'],5,2)."-". substr($record['tgl_tugas'],0,4); 		
 ?>

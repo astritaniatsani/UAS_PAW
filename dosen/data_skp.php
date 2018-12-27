@@ -1,43 +1,11 @@
 <?php 
 	session_start();
-
+	include '../koneksi.php';
 	// cek apakah yang mengakses halaman ini sudah login
 	if($_SESSION['status']==""){
 		header("location:../index.php?pesan=gagal");
 	}
 	?>
-
-<?php
-include '../koneksi.php';
-if(isset($_POST['submit'])){
-	
-	$nip=ucwords(htmlentities($_POST['nip']));
-	$nm_dosen=ucwords(htmlentities($_POST['nm_dosen']));
-	$gelar=ucwords(htmlentities($_POST['gelar']));
-	$j_kelamin=htmlentities($_POST['j_kelamin']);
-	$alamat=ucwords(htmlentities($_POST['alamat']));
-	$prodi=htmlentities($_POST['prodi']);
-	$status=htmlentities($_POST['status']);
-	
-	
-	$query=mysqli_query($koneksi,"insert into dosen values('$nip','$nm_dosen','$gelar','$j_kelamin','$alamat','$prodi','$status')");
-	
-	
-	if($query){
-		?><div class="alert alert-success" role="alert">
-									<strong>
-                                    <h1>Data Berhasil Disimpan !!!
-								</div><script language="javascript">document.location.href="data_dosen.php";</script><?php
-	}else{
-		?><div class="alert alert-success" role="alert">
-									<strong>
-                                    <h1>Data Gagal Disimpan !!!
-								</div><script language="javascript">document.location.href="data_dosen.php";</script><?php
-	}
-		
-}else{
-	unset($_POST['submit']);
-}
 
 
 ?>

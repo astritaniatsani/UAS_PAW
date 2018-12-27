@@ -1,12 +1,13 @@
 <?php 
-session_start();
+	session_start();
+	include '../koneksi.php';
+	// cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['status']==""){
+		header("location:../index.php?pesan=gagal");
+	}
+	?>
 
-if(isset($_SESSION['username'])){
 
-	//koneksi terpusat
-	include "../koneksi.php";
-	$username=$_SESSION['username'];
-?>
 <!DOCTYPE html>
 <head>
 <title>SISuTas : Sistem Informasi Surat Tugas</title>

@@ -223,17 +223,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 			</li>
             
-  
-			<li>
-				<a href="laporan_surat.php">
+<!--<li>
+				<a href="surat_tugas/laporan_sutuga.php">
 					<i class="fa fa-file-text-o nav_icon"></i>
 					<span class="nav-text">
 					Laporan
 					</span>
 				</a>
-			</li>
-			
-		</ul>
+			</li>-->
+			</ul>
 		<ul class="logout">
 			<li>
 			<a href="../logout.php">
